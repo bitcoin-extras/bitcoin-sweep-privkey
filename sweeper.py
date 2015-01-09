@@ -61,6 +61,7 @@ class BlockchainProcessor:
         print "[sweep] address:",addr,"priv:",priv
 
         if not self.hasunspent(addr):
+            print "[sweep] no unspent outputs"
             return
         try:
             h = history(addr)
