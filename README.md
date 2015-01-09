@@ -10,10 +10,6 @@ While blockchain.info allows you to sweep a private key, we wanted to introduce 
 
 Transactions get pushed to the network through your local bitcoind node, so your transactions (if chosen so) never leave your own infrastructure prior to relaying.
 
-# TODOs
-
-Important: While everything works autonomous now, we still need to fetch the "transaction history" from a custom place. Right now blockchain info is queried in bitcoin/bci.py.
-
 # Running
 
 The funds can be swept easily by issuing this command with the private key as an argument.
@@ -35,17 +31,13 @@ BTCD_PASS = "yourpassword"
 BTCD_HOST = "localhost"
 BTCD_PORT = "8332"
 
-# this line is when you want to use your own INSIGHT-API server
+# this should point to your INSIGHT API Server
 #UNSPENT_CHECKER = "http://localhost:3000/api/addr/%s/utxo?noCache=1"
-
-# otherwise just use blockchain.info to get the history
-UNSPENT_CHECKER = "https://blockchain.info/de/unspent?active=%s"
 
 MAX_BITCOIND_TRIES = 10
 MAX_BLOCKCHAIN_API_URL_TRIES = 10
 ```
 
-Note, that you can configure the URL to check for unspent outputs to be either blockchain.info or your custom server. Comment out the one you don't need.
 Also, the time configurations are telling the script, how often to try reaching a service before exiting.
 
 Make sure your bitcoin client is configured as a server, e.g. edit (or create) a bitcoin.conf file with at least this content. The file usually lies in ~/.bitcoin/bitcoin.conf:
