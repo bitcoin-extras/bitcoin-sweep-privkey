@@ -363,7 +363,8 @@ def apply_multisignatures(*args):
 
 
 def is_inp(arg):
-    return len(arg) > 64 or "output" in arg or "outpoint" in arg
+    # inputs from INSIGHT have this field. This is input definitely
+    return "confirmationsFromCache" in arg
 
 
 def mktx(*args):
@@ -377,16 +378,11 @@ def mktx(*args):
 
     txobj = {"locktime": 0, "version": 1, "ins": [], "outs": []}
     for i in ins:
-        if isinstance(i, dict) and "outpoint" in i:
-            txobj["ins"].append(i)
-        else:
-            if isinstance(i, dict) and "output" in i:
-                i = i["output"]
-            txobj["ins"].append({
-                "outpoint": {"hash": i[:64], "index": int(i[65:])},
-                "script": "",
-                "sequence": 4294967295
-            })
+        txobj["ins"].append({
+            "outpoint": {"hash": i['txid'], "index": int(i['vout'])},
+            "script": "",
+            "sequence": 4294967295
+        })
     for o in outs:
         if isinstance(o, (str, unicode)):
             addr = o[:o.find(':')]
