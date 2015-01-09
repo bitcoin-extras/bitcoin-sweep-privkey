@@ -60,7 +60,6 @@ class BlockchainProcessor:
         addr = pubtoaddr(pub)
         print "[sweep] address:",addr,"priv:",priv
 
-        addr = "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY"
         pushback_container = []
 
         if not self.hasunspent(addr,pushback_container):
