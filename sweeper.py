@@ -25,7 +25,6 @@ MAX_BLOCKCHAIN_API_URL_TRIES = 10
 
 class BlockchainProcessor:
     def hasunspent(self, addr):
-        print UNSPENT_CHECKER % addr
         global MAX_BLOCKCHAIN_API_URL_TRIES
         while True:
             try:
